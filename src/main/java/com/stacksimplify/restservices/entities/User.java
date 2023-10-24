@@ -1,5 +1,7 @@
 package com.stacksimplify.restservices.entities;
 
+import java.util.List;
+
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -8,10 +10,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name= "_user")
+//@Table(name= "User")
 public class User {
     @Id
     @GeneratedValue
@@ -36,6 +39,9 @@ public class User {
 	
 	@Column(name="SSN",length=50,nullable=false,unique=true)
 	private String  ssn;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Order> orders;
 
 	public User() {
 	
@@ -106,6 +112,16 @@ public class User {
 
 	public void setSsn(String ssn) {
 		this.ssn = ssn;
+	}
+
+	
+	
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 
 	@Override
