@@ -36,8 +36,8 @@ public class UserService {
    }
 
    //getUserbyId
-   public Optional<User> getUserById(Long id)throws UserNotFoundException {
-	Optional<User> user=userRepository.findById(id);
+   public Optional<User> getUserById(Long userid)throws UserNotFoundException {
+	Optional<User> user=userRepository.findById(userid);
 	
 	if(!user.isPresent()) {
 		throw new UserNotFoundException("User Not Found in user Repository");
@@ -46,26 +46,26 @@ public class UserService {
 }
 
    //update USer
-   public User updateUserById(Long id,User user) throws UserNotFoundException {
+   public User updateUserById(Long userid,User user) throws UserNotFoundException {
 	   
-		Optional<User> optionalUser=userRepository.findById(id);
+		Optional<User> optionalUser=userRepository.findById(userid);
 
 		if(!optionalUser.isPresent()) {
 			throw new UserNotFoundException("User Not Found in user Repository , provide correct user Id");
 		}
-		   user.setId(id);
+		   user.setuserid(userid);
 		   return userRepository.save(user);
    }
 
    //deleteUser
-   public void deleteUserById(Long id) {
-	   Optional<User> optionalUser=userRepository.findById(id);
+   public void deleteUserById(Long userid) {
+	   Optional<User> optionalUser=userRepository.findById(userid);
 
 		if(!optionalUser.isPresent()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"User Not Found in user Repository , provide correct user Id");
 		}
 
-	  				  userRepository.deleteById(id);
+	  				  userRepository.deleteById(userid);
   }
 
    // get userByName

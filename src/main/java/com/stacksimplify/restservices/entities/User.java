@@ -5,20 +5,22 @@ import java.util.List;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.hateoas.RepresentationModel;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 
 @Entity
 //@Table(name= "User")
-public class User {
+public class User extends RepresentationModel<User>{
+	//public class User extends ResourceSupport{
+	
     @Id
     @GeneratedValue
-	private Long id;
+	private Long userid;
     
     @Column(name="USER_NAME", length=50,nullable=false,unique=true)
    @NotEmpty(message = "Username is Mandatory field. Please provide username")
@@ -47,9 +49,9 @@ public class User {
 	
 	}
 
-	public User(Long id, String username, String firstname, String lasttname, String email, String role, String ssn) {
+	public User(Long userid, String username, String firstname, String lasttname, String email, String role, String ssn) {
 		super();
-		this.id = id;
+		this.userid = userid;
 		this.username = username;
 		this.firstname = firstname;
 		this.lasttname = lasttname;
@@ -58,12 +60,12 @@ public class User {
 		this.ssn = ssn;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getUserid() {
+		return userid;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setuserid(Long userid) {
+		this.userid = userid;
 	}
 
 	public String getUsername() {
@@ -126,9 +128,11 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", firstname=" + firstname + ", lasttname=" + lasttname
-				+ ", email=" + email + ", role=" + role + ", ssn=" + ssn + "]";
+		return "User [userid=" + userid + ", username=" + username + ", firstname=" + firstname + ", lasttname="
+				+ lasttname + ", email=" + email + ", role=" + role + ", ssn=" + ssn + ", orders=" + orders + "]";
 	}
+
+	
 
 
 	

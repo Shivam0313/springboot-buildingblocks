@@ -42,10 +42,10 @@ public class UserController {
 	}
 	
 	//getUserById
-	@GetMapping("/{id}")
-	public Optional<User> User(@PathVariable @Min(1) Long id ) {
+	@GetMapping("/{userid}")
+	public Optional<User> getUserById(@PathVariable @Min(1) Long userid ) {
 		try {
-			return userService.getUserById(id);
+			return userService.getUserById(userid);
 		} catch (UserNotFoundException ex) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,ex.getMessage());
 		}
@@ -66,10 +66,10 @@ public class UserController {
 		}
 	}
 	
-	@PutMapping("/{id}")
-	public User updateUserById(@PathVariable Long id,@RequestBody User user) {
+	@PutMapping("/{userid}")
+	public User updateUserById(@PathVariable Long userid,@RequestBody User user) {
 		try {
-			return userService.updateUserById(id, user);
+			return userService.updateUserById(userid, user);
 		} catch (UserNotFoundException ex) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,ex.getMessage());
 
@@ -77,9 +77,9 @@ public class UserController {
 	}
 	
 	
-	@DeleteMapping("/{id}")
-	public void deleteUserById(@PathVariable Long id) {
-		userService.deleteUserById(id);
+	@DeleteMapping("/{userid}")
+	public void deleteUserById(@PathVariable Long userid) {
+		userService.deleteUserById(userid);
 
 	}
 	
