@@ -7,6 +7,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.hateoas.RepresentationModel;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -19,7 +20,8 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name= "users")
-@JsonIgnoreProperties({"firstname","lastname"})
+//@JsonIgnoreProperties({"firstname","lastname"}) --static filtering @JsonIgnore
+@JsonFilter(value="userFilter")
 public class User extends RepresentationModel<User>{
 	//public class User extends ResourceSupport{
 	
@@ -45,7 +47,7 @@ public class User extends RepresentationModel<User>{
 	private String  role;
 	
 	@Column(name="SSN",length=50,nullable=false,unique=true)
-	@JsonIgnore
+	//@JsonIgnore
 	private String  ssn;
 	
 	@OneToMany(mappedBy = "user")
