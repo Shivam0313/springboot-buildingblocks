@@ -7,9 +7,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.hateoas.RepresentationModel;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,36 +19,49 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name= "users")
 //@JsonIgnoreProperties({"firstname","lastname"}) --static filtering @JsonIgnore
-@JsonFilter(value="userFilter")
+//@JsonFilter(value="userFilter") --used for mapping jackson values
 public class User extends RepresentationModel<User>{
 	//public class User extends ResourceSupport{
 	
     @Id
     @GeneratedValue
+    @JsonView(Views.External.class)
 	private Long userid;
     
     @Column(name="USER_NAME", length=50,nullable=false,unique=true)
    @NotEmpty(message = "Username is Mandatory field. Please provide username")
+    @JsonView(Views.External.class)
     private String username;
     
   @Size(min=2, message="FirstName should have atleast 2 characters")            
 	@Column(name="FIRST_NAME",length=50,nullable=false)
-	private String  firstname;
+  @JsonView(Views.External.class)
+  private String  firstname;
 	
 	@Column(name="LAST_NAME",length=50,nullable=false)
+    @JsonView(Views.External.class)
+
 	private String  lasttname;
 	
 	@Column(name="EMAIL_ADDRESS",length=50,nullable=false)
+    @JsonView(Views.External.class)
+
 	private String   email;
 	
 	@Column(name="ROLE",length=50,nullable=false)
+    @JsonView(Views.Internal.class)
+
 	private String  role;
 	
 	@Column(name="SSN",length=50,nullable=false,unique=true)
 	//@JsonIgnore
+    @JsonView(Views.Internal.class)
+
 	private String  ssn;
 	
 	@OneToMany(mappedBy = "user")
+    @JsonView(Views.Internal.class)
+
 	private List<Order> orders;
 
 	public User() {
