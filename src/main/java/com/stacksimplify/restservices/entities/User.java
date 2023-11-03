@@ -64,11 +64,13 @@ public class User extends RepresentationModel<User>{
 
 	private List<Order> orders;
 
+	private String address;
+	
 	public User() {
 	
 	}
 
-	public User(Long userid, String username, String firstname, String lasttname, String email, String role, String ssn) {
+	public User(Long userid, String username, String firstname, String lasttname, String email, String role, String ssn,String address) {
 		super();
 		this.userid = userid;
 		this.username = username;
@@ -77,13 +79,14 @@ public class User extends RepresentationModel<User>{
 		this.email = email;
 		this.role = role;
 		this.ssn = ssn;
+		this.address=address;
 	}
 
 	public Long getUserid() {
 		return userid;
 	}
 
-	public void setuserid(Long userid) {
+	public void setUserid(Long userid) {
 		this.userid = userid;
 	}
 
@@ -135,8 +138,6 @@ public class User extends RepresentationModel<User>{
 		this.ssn = ssn;
 	}
 
-	
-	
 	public List<Order> getOrders() {
 		return orders;
 	}
@@ -145,13 +146,22 @@ public class User extends RepresentationModel<User>{
 		this.orders = orders;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userid=" + userid + ", username=" + username + ", firstname=" + firstname + ", lasttname="
-				+ lasttname + ", email=" + email + ", role=" + role + ", ssn=" + ssn + ", orders=" + orders + "]";
+				+ lasttname + ", email=" + email + ", role=" + role + ", ssn=" + ssn + ", orders=" + orders
+				+ ", address=" + address + "]";
 	}
 
-	
+
 
 
 	

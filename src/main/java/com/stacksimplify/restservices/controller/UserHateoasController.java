@@ -44,11 +44,11 @@ public class UserHateoasController {
 	
 	//getUserById
 	@GetMapping("/{id}")
-	public EntityModel<User> getUserById(@PathVariable("id") @Min(1) Long id ) {
+	public EntityModel<User> getUserById(@PathVariable("id") @Min(1) Long userid ) {
 		try {
-			Optional<User> userOptional=userService.getUserById(id);
+			Optional<User> userOptional=userService.getUserById(userid);
 			User user = userOptional.get();
-			Long userid=user.getUserid();
+			Long uSerid=user.getUserid();
 			Link selfLink= WebMvcLinkBuilder.linkTo(UserHateoasController.class).slash(userid).withSelfRel();
 			user.add(selfLink);
 			EntityModel<User> finalresource= EntityModel.of(user);
